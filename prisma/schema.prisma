@@ -1,0 +1,67 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+}
+
+model News {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  shortDescription String
+  content          String
+  image            String
+  isFeatured       Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Gallery {
+  id        String   @id @default(cuid())
+  image     String
+  title     String?
+  createdAt DateTime @default(now())
+}
+
+model Hero {
+  id          String @id @default("hero-section")
+  bannerImage String
+  title       String
+  subtitle    String
+  btn1Text    String
+  btn1Link    String
+  btn2Text    String
+  btn2Link    String
+}
+
+model Contact {
+  id        String @id @default("contact-info")
+  address   String
+  phone     String
+  email     String
+  mapEmbed  String
+}
+
+model Footer {
+  id          String @id @default("footer-content")
+  aboutText   String
+  socialLinks String // Store as JSON string
+  copyright   String
+}
+
+model Navbar {
+  id        String @id @default("navbar-settings")
+  logoText  String
+  links     String // Store as JSON string [{name, href}]
+  loginText String
+  loginLink String
+}

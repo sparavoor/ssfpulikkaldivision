@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #059669;
+  /* Emerald 600 - slightly more sophisticated */
+  --color-primary-dark: #064e3b;
+  --color-secondary: #0d9488;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-ssf: "Cooper Black", serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.ssf-font {
+  font-family: var(--font-ssf);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+    --primary: 161 94% 30%;
+    --secondary: 161 94% 40%;
+    --border: 220 15% 94%;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: white;
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    /* Medium weight for modern look */
+    letter-spacing: -0.02em;
+  }
+}
+
+.shadow-premium {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  /* Very subtle */
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.05);
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-8 py-3 rounded-full font-medium transition-all hover:bg-primary-dark active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply bg-white text-gray-900 border border-gray-200 px-8 py-3 rounded-full font-medium transition-all hover:bg-gray-50 active:scale-[0.98];
+}
+
+.nav-link {
+  @apply text-gray-500 hover:text-black font-medium transition-colors;
 }
